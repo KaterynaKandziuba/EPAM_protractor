@@ -43,12 +43,10 @@ Given user arrives on the https://www.epam.com/
 When user clicks on “Search” icon on the header
 Then tab with the most frequent searches occurs
 
-2.	To check the list of the most frequent searches is clickable
+2.	To check the search "Submit" button is blue
 Given user arrives on the https://www.epam.com/
 When user clicks on “Search” icon on the header
-And tab with the most frequent searches occurs
-Then user clicks on the first option 
-And the frequent search text occurs in the search field
+Then the search "Submit" button is blue
 
 3.	To check the correctness of the search results
 Given user arrives on the https://www.epam.com/
@@ -80,7 +78,7 @@ When user clicks on “Contact Us” button
 Then user clicks on the fields with *
 And fields start to glow red
 
-4.	To check for errors for empty fields
+4.	To check for errors for empty checkboxes
 Given user arrives on the https://www.epam.com/
 When user clicks on “Contact Us” button
 And user fills combo boxes
