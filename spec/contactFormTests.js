@@ -15,7 +15,6 @@ describe('EPAM "Contact us" form demo test', function(){
     xit('To check the "Contact us" button', async function(){
         await HomePage.clickContactUsButton();
         expect (await ContactFormPage.onContactFormPage()).toBe(ContactFormPage.url);
-        
     }) 
     
 

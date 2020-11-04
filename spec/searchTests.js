@@ -17,7 +17,7 @@ describe('EPAM website search functionality test', function(){
     })
 
     
-    xit('To check the search "Submit" button is blue', async function(){
+    it('To check the search "Submit" button is blue', async function(){
         await HomePage.clickSearchButton();
         expect (await HomePage.getColorOfSubmitButton()).toEqual("rgba(118, 205, 216, 1)")
     })
@@ -27,8 +27,8 @@ describe('EPAM website search functionality test', function(){
 
         await HomePage.clickSearchButton();
         await HomePage.makeSearch('Investor');
-        const actualResult = SearchPage.searchResults.map(async (item) => {
-            expect (await item.getText()).toContain(/Investor/i);
+        const actualResult = Array(SearchPage.searchResults).map(async (item) => {
+            expect (await item.getText()).toContain('Investor');
                 })
 
         await Promise.all(actualResult);
