@@ -1,31 +1,44 @@
+var data = require('../data/data.js')
+
 module.exports = class BasePage{
+      
 
     constructor (){
 
-        this.timeout = {
-            'xs': 420,
-            's' : 1000,
-            'm' : 2000,
-            'l' : 5000,
-            'xl': 9000,
-            'xxl': 15000
-        };
+        this.acceptCookiesButton = element(by.css('[aria-label="Accept our use of cookies"]'));
+        this.timeout =  data.timeout;
     }
 
-        async delay () {
-            return new Promise(resolve => {setTimeout(() => resolve(), this.timeout.s)})
-        }
+    async navigateTo() {
+        await browser.get(this.url, this.timeout.xl);
+        await this.waitToLoad();
+    }
 
-        async implicitlyWait(ms){
-            browser.manage().timeouts().implicitlyWait(ms);
-        }
+    async waitToLoad () {
+        return new Promise(resolve => {setTimeout(() => resolve(), this.timeout.m)})
+    }
 
-        async excplicitlyWaitPresenceOf(element, ms){
-            browser.wait(protractor.ExpectedConditions.presenceOf(element), ms);
-        }
+    async implicitlyWait(ms){
+        browser.manage().timeouts().implicitlyWait(ms);
+    }
 
-        async excplicitlyWaitToBeClicable(element, ms){
-            browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), ms);
-        }
+    async excplicitlyWaitPresenceOf(element, ms){
+        browser.wait(protractor.ExpectedConditions.presenceOf(element), ms);
+    }
+
+    async excplicitlyWaitToBeClicable(element, ms){
+        browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), ms);
+    }
+
+    async moveToElement(el, x, y){
+        browser.actions()
+        .mouseMove(el, {x: x, y: y}) 
+        .perform();
+    }
+
+    async isCookiesButtonDisplayed(){
+        if (this.acceptCookiesButton.isDisplayed()){
+            await this.acceptCookiesButton.click()}
+        }   
     }
     

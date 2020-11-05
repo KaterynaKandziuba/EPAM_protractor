@@ -1,6 +1,6 @@
 var HomePage = require('../pages/homePage.js');
 var ContactFormPage = require('../pages/contactFormPage.js')
-var formData = require('../data/formData.js')
+var formData = require('../data/data.js')
 
 describe('EPAM "Contact us" form demo test', function(){
     
@@ -8,38 +8,33 @@ describe('EPAM "Contact us" form demo test', function(){
 
     beforeEach(async function () {
         await browser.get(browser.baseUrl);
-        await HomePage.delay();
+        await HomePage.waitToLoad();
+        await HomePage.clickContactUsButton();
     });
 
 
-    xit('To check the "Contact us" button', async function(){
-        await HomePage.clickContactUsButton();
+    it('To check the "Contact us" button', async function(){
         expect (await ContactFormPage.onContactFormPage()).toBe(ContactFormPage.url);
     }) 
     
 
-    xit('To check the ability to fill all form fields with text', async function(){
-        await HomePage.clickContactUsButton();
-        //await ContactFormPage.fillComboBoxes(formData);
-        await ContactFormPage.fillFields(formData, true);
+    it('To check the ability to fill all form fields with text', async function(){
+        await ContactFormPage.fillFields(true);
+        await ContactFormPage.fillHowDidYouHearDropdown();
         await ContactFormPage.fillCheckboxes();
-        expect(await ContactFormPage.errorMessages.isPresent()).toBe(true);
+        expect(await ContactFormPage.errorMessages.isPresent()).toBe(false);
     })
 
 
-    xit('To check the obligatory filling of the fields with *', async function(){
-        await HomePage.clickContactUsButton();
-        await ContactFormPage.fillFields(formData, false);
-        expect(await ContactFormPage.fieldsErrorMessages.count()).toBe(3);
+    it('To check the obligatory filling of the fields with *', async function(){
+        await ContactFormPage.fillFields(false);
+        expect(await ContactFormPage.fieldsErrorMessages.count()).toBe(4);
     })
 
 
-    //Failed: Cannot read property 'bind' of undefined
-    xit('To check for errors for empty checkboxes', async function(){
-
-        await HomePage.clickContactUsButton();
-        // await ContactFormPage.fillComboBoxes(formData);
+    it('To check for errors for empty checkboxes', async function(){
         await ContactFormPage.fillFields(formData, true);
+        await ContactFormPage.fillHowDidYouHearDropdown();
         await ContactFormPage.submitButtonClick();
         expect(await ContactFormPage.errorMessages.count()).toBe(1);
         

@@ -9,7 +9,6 @@ class HomePage extends BasePage{
         this.submitSearchButton = element(by.css(".header-search__submit"));
         this.searchField = element(by.xpath('//input[@id = "new_form_search"]'));
         this.contactUsButton = element(by.xpath("//a[@class = 'cta-button-ui cta-button--envelope header__control']"));
-        this.acceptCookiesButton = element(by.css('[aria-label="Accept our use of cookies"]'));
     }
 
     async clickContactUsButton() {
@@ -17,12 +16,8 @@ class HomePage extends BasePage{
     }
 
     async goToInvestorsPage(){
-        if (this.acceptCookiesButton.isDisplayed()){
-            await this.excplicitlyWaitToBeClicable(this.acceptCookiesButton, this.timeout.l);
-            await this.acceptCookiesButton.click();
-            this.clickInvestorsButton();
-
-        } else await this.clickInvestorsButton();
+        await this.isCookiesButtonDisplayed();
+        await this.clickInvestorsButton();
     }
 
     async clickInvestorsButton(){
@@ -34,13 +29,7 @@ class HomePage extends BasePage{
         await this.implicitlyWait(this.timeout.m);
     }
 
-    async getColorOfSubmitButton(){
-        await this.excplicitlyWaitPresenceOf(this.submitSearchButton, this.timeout.m);
-        await this.submitSearchButton.getCssValue("background-color");
-    }
-
     async makeSearch(keys){
-
         await this.searchField.sendKeys(keys);
         await this.searchField.submit();
         await this.implicitlyWait(this.timeout.l);

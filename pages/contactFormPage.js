@@ -1,5 +1,5 @@
 var BasePage = require('../pages/basePage.js');
-var data = require('../data/formData.js')
+var data = require('../data/data.js')
 
 class ContactFormPage extends BasePage{
     
@@ -8,7 +8,7 @@ class ContactFormPage extends BasePage{
         this.url = 'http://www.epam.com/about/who-we-are/contact';
         this.formBox = element(by.xpath("//div[@class='layout-box__desktop bg-color-smoke-gray']"));
         this.howDidYouHearCombobox = element(by.xpath("(//span[@class='select2-selection__rendered'])[6]"));
-        this.eventOptionInHearCombobox = element(by.css("#select2-_content_epam_en_about_who-we-are_contact_jcr_content_content-container_section_section-par_form_constructor_user_comment_how_hear_about-results"));
+        this.optionInHearCombobox = element(by.css("#select2-_content_epam_en_about_who-we-are_contact_jcr_content_content-container_section_section-par_form_constructor_user_comment_how_hear_about-results"));
         this.commentsField = element(by.xpath("//textarea[@placeholder='Your inquiry or comments']"));
         this.checkboxes = element.all(by.xpath("//label[@class='checkbox__label checkbox-custom-label checkbox__label-text']"))
         this.errorMessages = element.all(by.xpath("//span[text() = 'This is a required field']"));
@@ -23,30 +23,9 @@ class ContactFormPage extends BasePage{
     }
 
 
-    async fillComboBoxes(data) {
-        await this.excplicitlyWaitPresenceOf(this.formBox, 5000);
-        const promises = data.formComboBoxes.map( async (item, index) => {
-            //! Failed: element not interactable
-            await element(by.xpath("//span[contains(text(), '" + item + "')]")).click();
-            await this.excplicitlyWaitPresenceOf(element(by.xpath("//li[contains(text(),'" + formComboBoxesOptions[index] + "')]")), timeouts.m);
-            await element(by.xpath("//li[contains(text(),'" + formComboBoxesOptions[index] + "')]")).click();
-        })
+    async fillFields(isFieldsFilled){
 
-        await Promise.all(promises);
-        await this.implicitlyWait(this.timeout.l);
-        await fillHowDidYouHearDropdown();
-    }
-
-
-    async fillHowDidYouHearDropdown(){
-        await this.howDidYouHearCombobox.click();
-        await this.eventOptionInHearCombobox.click();
-    }
-
-
-    async fillFields(data, isFieldsFilled){
-
-        await this.excplicitlyWaitPresenceOf(this.formBox, 5000);
+        await this.excplicitlyWaitPresenceOf(this.formBox, this.timeout.l);
 
         const promises = data.formFields.map( async (item, index) => {
             await this.implicitlyWait(this.timeout.l);
@@ -64,10 +43,16 @@ class ContactFormPage extends BasePage{
         isFieldsFilled ? await this.commentsField.sendKeys(data.valuesForForm[data.valuesForForm.length - 1]) : await this.commentsField.sendKeys('');
     }
 
+    async fillHowDidYouHearDropdown(){
+        
+        await this.isCookiesButtonDisplayed();
+        await this.howDidYouHearCombobox.click();
+        await this.optionInHearCombobox.click();
+    }
 
     async fillCheckboxes(){
-        
-        //зачем-то хочет явное объявление массива
+
+        await this.moveToElement(this.submitButton, 100, 0);
         const promises = Array(this.checkboxes).map( async (item) => {
             await browser.sleep(this.timeout.m);
             await this.excplicitlyWaitPresenceOf(item, this.timeout.m);
@@ -79,8 +64,7 @@ class ContactFormPage extends BasePage{
 
 
     async submitButtonClick(){
-        // await this.excplicitlyWaitToBeClicable(this.submitButton, this.timeout.l);
-        await browser.sleep(this.timeout.m); // не падает, если прокручивать
+        await this.isCookiesButtonDisplayed();
         await this.implicitlyWait(this.timeout.xl);
         await this.submitButton.click();
         await this.implicitlyWait(this.timeout.xl);

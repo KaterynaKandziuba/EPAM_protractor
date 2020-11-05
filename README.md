@@ -67,8 +67,7 @@ Then Contact Us page opens
 2.	To check the ability to fill all form fields with text
 Given user arrives on the https://www.epam.com/
 When user clicks on “Contact Us” button
-Then user fills combo boxes
-And fills the form fields with text
+Then user fills the form fields with text
 And fills checkboxes
 And no error occurs
 
@@ -81,8 +80,8 @@ And fields start to glow red
 4.	To check for errors for empty checkboxes
 Given user arrives on the https://www.epam.com/
 When user clicks on “Contact Us” button
-And user fills combo boxes
 And fills the form fields with text
+And fills "HOW DID YOU HEAR ABOUT EPAM?*?" combo box
 And press “Submit” button
 Then “Fill checkbox” error occurs
 
