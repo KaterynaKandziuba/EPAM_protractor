@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target" : "ES6",
+        "outDir": "dist", //https://www.typescriptlang.org/tsconfig#outDir
+        "lib" : ["ES2015.Promise", "DOM"], // affects type-checking
+        "strict": true,
+        "types" : ["jasmine", "node"]
+        //allows to use JS
+        // "allowJS": true, 
+        // "checkJS": true
+        
+    },
+    "exclude": [ // don`t understand
+        "node_modules/*"
+      ]
+}
