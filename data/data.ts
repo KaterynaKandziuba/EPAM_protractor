@@ -1,9 +1,9 @@
-module.exports = {
+export default {
 
     formFields : ['First Name*', 'Last Name*', 'Email*', 'Phone*', 'Company'],
     valuesForForm : ["Vasya", "Pupkin", "vasya_pupkin@gmail.com", "+380988888888", "ABC", "No comments"],
 
-    timeout : {
+    timeout :  {
         'xs': 420,
         's' : 1000,
         'm' : 2000,

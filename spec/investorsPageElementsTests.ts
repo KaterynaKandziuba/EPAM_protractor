@@ -1,5 +1,6 @@
-var HomePage = require('../pages/homePage.js');
-var InvestorsPage = require('../pages/investorsPage.js')
+import { browser } from 'protractor';
+import HomePage from '../pages/homePage';
+import InvestorsPage from '../pages/investorsPage';
 
 describe('EPAM website demo test', function(){
 
@@ -36,7 +37,7 @@ describe('EPAM website demo test', function(){
 
 
     xit('To check the Epam management buttons presence', async function(){
-        await HomePage.moveToElement(InvestorsPage.managementButtons, 50);
+        await HomePage.moveToElement(InvestorsPage.managementButtons[0], 50, 0);
         expect( await InvestorsPage.managementButtons.first().getText()).toBe("Board of Directors");
         expect( await InvestorsPage.managementButtons.last().getText()).toBe("Executive Management");
     })
@@ -50,4 +51,3 @@ describe('EPAM website demo test', function(){
     })
 
     });
-

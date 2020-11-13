@@ -4,7 +4,8 @@
   "description": "protractor framework for EPAM website",
   "main": "index.js",
   "scripts": {
-    "test": "protractor ./conf/conf.js"
+    "test": "protractor ./conf/conf.ts",
+    "webdriver-update": "webdriver-manager update"
   },
   "repository": {
     "type": "git",
@@ -16,15 +17,18 @@
   "author": "Kateryna Kandziuba <kateryna_kandziuba@epam.com>",
   "license": "ISC",
   "dependencies": {
-    "jasmine-spec-reporter": "4.2.1",
-    "protractor": "^5.4.2",
-    "@types/node": "^10.5.2",
     "@types/jasmine": "^3.3.12",
-    "typescript": "^3.4.1"
+    "@types/node": "^10.5.2",
+    "jasmine": "^2.6.2",
+    "jasmine-spec-reporter": "4.2.1",
+    "protractor": "^5.4.4",
+    "typescript": "^3.6.4"
   },
   "bugs": {
     "url": "https://github.com/KaterynaKandziuba/EPAM_protractor/issues"
   },
   "homepage": "https://github.com/KaterynaKandziuba/EPAM_protractor#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "ts-node": "8.4.1"
+  }
 }

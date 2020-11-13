@@ -1,16 +1,26 @@
 {
     "compilerOptions": {
-        "target" : "ES6",
-        "outDir": "dist", //https://www.typescriptlang.org/tsconfig#outDir
+        "module": "CommonJs",
+        "target" : "ES2018",
+        // "outDir": "dist", //https://www.typescriptlang.org/tsconfig#outDir
         "lib" : ["ES2015.Promise", "DOM"], // affects type-checking
-        "strict": true,
-        "types" : ["jasmine", "node"]
-        //allows to use JS
-        // "allowJS": true, 
-        // "checkJS": true
-        
+        "strict": true, // mode
+        "types" : ["jasmine", "node"], // frameworks we work with
+        "maxNodeModuleJsDepth": 50,
+        "esModuleInterop": true, //allows to use JS
+        "allowJs": true, 
+        "checkJs": true,
+        "moduleResolution": "node"
     },
-    "exclude": [ // don`t understand
-        "node_modules/*"
-      ]
+
+    "exclude": [ // from compiling
+      "./conf/*.js", 
+      "node_modules/*",
+      "built",
+      "testapp",
+      "website",
+      "scripts",
+      "exampleTypescript",
+      "spec/**/*"
+    ]
 }

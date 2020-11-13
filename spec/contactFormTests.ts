@@ -1,6 +1,7 @@
-var HomePage = require('../pages/homePage.js');
-var ContactFormPage = require('../pages/contactFormPage.js')
-var formData = require('../data/data.js')
+import { browser } from 'protractor';
+import HomePage from '../pages/homePage';
+import ContactFormPage from '../pages/contactFormPage';
+import formData from '../data/data';
 
 describe('EPAM "Contact us" form demo test', function(){
     
@@ -21,7 +22,7 @@ describe('EPAM "Contact us" form demo test', function(){
     it('To check the ability to fill all form fields with text', async function(){
         await ContactFormPage.fillFields(true);
         await ContactFormPage.fillHowDidYouHearDropdown();
-        await ContactFormPage.fillCheckboxes();
+        //await ContactFormPage.fillCheckboxes();
         expect(await ContactFormPage.errorMessages.isPresent()).toBe(false);
     })
 
@@ -33,7 +34,7 @@ describe('EPAM "Contact us" form demo test', function(){
 
 
     it('To check for errors for empty checkboxes', async function(){
-        await ContactFormPage.fillFields(formData, true);
+        await ContactFormPage.fillFields(true);
         await ContactFormPage.fillHowDidYouHearDropdown();
         await ContactFormPage.submitButtonClick();
         expect(await ContactFormPage.errorMessages.count()).toBe(1);
