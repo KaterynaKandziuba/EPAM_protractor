@@ -4,7 +4,7 @@
   "description": "protractor framework for EPAM website",
   "main": "index.js",
   "scripts": {
-    "test": "protractor ./conf/conf.ts",
+    "test": "protractor ./conf/conf.js",
     "webdriver-update": "webdriver-manager update"
   },
   "repository": {
